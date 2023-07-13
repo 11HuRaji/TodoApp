@@ -1,25 +1,31 @@
-import React, {useState} from 'react';
-import './App.css';
+import React, { useEffect } from "react";
+import { TodoForm, TodoList } from "./components";
+
+import { useTodoState } from "./contexts";
+import "./App.css";
 
 function App() {
-  const [inputText, setInputText] = useState('');
+  const { status, setFTodos, todos } = useTodoState();
 
-  function handleInput(e) {
-    setInputText(e.target.value);
-  }
+  const handleFilter = () => {
+    if (status === "completed") {
+      setFTodos(todos.filter((todo) => todo.completed == true));
+    } else if (status === "uncompleted") {
+      setFTodos(todos.filter((todo) => todo.completed == false));
+    } else {
+      setFTodos(todos);
+    }
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+  useEffect(() => {
+    handleFilter();
+  }, [status, todos]);
 
   return (
-    <div>
-      <header>Sarah's Todo List</header>
-      <form onSubmit={handleSubmit}>
-        <input type="text" className="todo-input" onChange={handleInput} />
-	<button type="submit" className="todo-button">Add</button>
-      </form>
-    </div>
+    <>
+      <TodoForm />
+      <TodoList />
+    </>
   );
 }
 
