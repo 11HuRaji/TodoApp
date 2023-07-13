@@ -1,9 +1,10 @@
 import React from "react";
-import { useTodoState } from "../../contexts";
+import { useTodos, useStatus } from "../../contexts";
 
 function TodoForm() {
-  const { inputText, setInputText, todos, setTodos, setStatus } = useTodoState();
-  
+  const { inputText, setInputText, todos, setTodos } = useTodos();
+  const { setStatus } = useStatus();
+
   function handleInput(e) {
     setInputText(e.target.value);
   }
@@ -32,7 +33,11 @@ function TodoForm() {
             Add
           </button>
           <div className="select">
-            <select name="todos" className="filter-todo" onChange={handleStatus}>
+            <select
+              name="todos"
+              className="filter-todo"
+              onChange={handleStatus}
+            >
               <option value="all">All</option>
               <option value="completed">Completed</option>
               <option value="uncompleted">Uncompleted</option>

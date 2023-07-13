@@ -1,8 +1,8 @@
 import { TodoItem } from "..";
-import { useTodoState } from "../../contexts";
+import { useTodos } from "../../contexts";
 
 function TodoList() {
-  const { fTodos: todos, setTodos } = useTodoState();
+  const { fTodos: todos, setTodos } = useTodos();
 
   const deleteTodo = (todo) => {
     let filteredTodos = todos.filter((item) => item !== todo);

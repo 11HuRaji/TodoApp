@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { TodoForm, TodoList } from "./components";
 
-import { useTodoState } from "./contexts";
+import { useTodos, useStatus } from "./contexts";
 import "./App.css";
 
 function App() {
-  const { status, setFTodos, todos } = useTodoState();
+  const { setFTodos, todos } = useTodos();
+  const { status } = useStatus();
 
   const handleFilter = () => {
     if (status === "completed") {
